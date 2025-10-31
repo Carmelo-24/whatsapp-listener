@@ -1,13 +1,1 @@
-{
-  "name": "whatsapp-listener",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "whatsapp_listener.js",
-  "scripts": {
-    "start": "node whatsapp_listener.js"
-  },
-  "dependencies": {
-    "axios": "^1.6.0",
-    "puppeteer": "^19.11.1"
-  }
-}
+
