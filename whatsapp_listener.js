@@ -1,20 +1,24 @@
-import puppeteer from "puppeteer";
+import chromium from "chrome-aws-lambda";
+import puppeteer from "puppeteer-core";
 import axios from "axios";
 
-const n8nWebhook = "https://TUO_N8N_URL/webhook/whatsapp_in"; // 👈 cambia questo dopo
+const n8nWebhook = "https://TUO_N8N_URL/webhook/whatsapp_in"; // 👈 cambia con il tuo URL n8n
 
 (async () => {
-  const browser = await puppeteer.launch({
-  headless: "new",
-  args: [
-    "--no-sandbox",
-    "--disable-setuid-sandbox",
-    "--disable-dev-shm-usage",
-    "--disable-gpu",
-    "--disable-software-rasterizer"
-  ],
-});
+  const executablePath = await chromium.executablePath;
 
+  const browser = await puppeteer.launch({
+    args: [
+      ...chromium.args,
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-gpu",
+      "--disable-software-rasterizer"
+    ],
+    executablePath,
+    headless: chromium.headless,
+  });
 
   const page = await browser.newPage();
   await page.goto("https://web.whatsapp.com");
