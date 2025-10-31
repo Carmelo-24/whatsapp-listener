@@ -5,9 +5,16 @@ const n8nWebhook = "https://TUO_N8N_URL/webhook/whatsapp_in"; // 👈 cambia que
 
 (async () => {
   const browser = await puppeteer.launch({
-    headless: false, // se vuoi nascondere la finestra, metti true
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  headless: "new",
+  args: [
+    "--no-sandbox",
+    "--disable-setuid-sandbox",
+    "--disable-dev-shm-usage",
+    "--disable-gpu",
+    "--disable-software-rasterizer"
+  ],
+});
+
 
   const page = await browser.newPage();
   await page.goto("https://web.whatsapp.com");
